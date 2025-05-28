@@ -8,7 +8,7 @@ import { Radar } from "./Radar";
 function App() {
   const store = useRef(new AircraftStore({ timeout: 15000 }));
   const receiver = useRef(new ADSBReceiver(store.current));
-  const [zoom, setZoom] = useState(10);
+  const [zoom, setZoom] = useState(9);
   const [aircrafts, setAircrafts] = useState<Aircraft[]>([]);
     useEffect(() => {
       const timer = setInterval(() => {

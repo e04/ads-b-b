@@ -6,11 +6,9 @@ Decode ADS-B signal on browser with RTL-SDR by WebUSB.
 
 No needs backends and drivers to decode ADS-B signal, just only a browser.
 
-
 # Usage
 
-1. Set your Mapbox Token in `.env`
-2. Connect your RTL-SDR dongle 
-3. Run `npm run dev`
-4. Open `http://localhost:3000/`
-5. You can see airplane positions on a map!
+1. Connect your RTL-SDR dongle 
+2. Run `npm run dev`
+3. Open `http://localhost:3000/`
+4. You can see airplane positions on a map!

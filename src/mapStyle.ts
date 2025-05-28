@@ -1,0 +1,116 @@
+export const mapStyle = {
+  version: 8,
+  metadata: {},
+  sources: {
+    ne2_shaded: {
+      maxzoom: 6,
+      tileSize: 256,
+      tiles: [
+        "https://tiles.openfreemap.org/natural_earth/ne2sr/{z}/{x}/{y}.png",
+      ],
+      type: "raster",
+    },
+    openmaptiles: {
+      type: "vector",
+      url: "https://tiles.openfreemap.org/planet",
+    },
+  },
+  sprite: "https://tiles.openfreemap.org/sprites/ofm_f384/ofm",
+  glyphs: "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
+  layers: [
+    {
+      id: "background",
+      type: "background",
+      paint: { "background-color": "rgba(0, 0, 0, 1)" },
+    },
+    {
+      id: "water",
+      type: "fill",
+      source: "openmaptiles",
+      "source-layer": "water",
+      filter: [
+        "all",
+        ["match", ["geometry-type"], ["MultiPolygon", "Polygon"], true, false],
+        ["!=", ["get", "brunnel"], "tunnel"],
+      ],
+      paint: { "fill-antialias": true, "fill-color": "rgba(16, 16, 16, 1)" },
+    },
+    {
+      id: "aeroway-taxiway",
+      type: "line",
+      source: "openmaptiles",
+      "source-layer": "aeroway",
+      minzoom: 0,
+      filter: ["match", ["get", "class"], ["taxiway"], true, false],
+      layout: { "line-cap": "round", "line-join": "round" },
+      paint: {
+        "line-color": "rgba(82, 82, 82, 1)",
+        "line-opacity": 1,
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.55],
+          ["zoom"],
+          13,
+          1.8,
+          20,
+          20,
+        ],
+      },
+    },
+    {
+      id: "aeroway-area",
+      type: "fill",
+      source: "openmaptiles",
+      "source-layer": "aeroway",
+      minzoom: 0,
+      filter: [
+        "all",
+        ["match", ["geometry-type"], ["MultiPolygon", "Polygon"], true, false],
+        ["match", ["get", "class"], ["runway", "taxiway"], true, false],
+      ],
+      layout: { visibility: "visible" },
+      paint: {
+        "fill-color": "rgba(255, 255, 255, 1)",
+        "fill-opacity": ["interpolate", ["linear"], ["zoom"], 13, 0, 14, 1],
+      },
+    },
+    {
+      id: "aeroway-runway",
+      type: "line",
+      source: "openmaptiles",
+      "source-layer": "aeroway",
+      minzoom: 0,
+      filter: [
+        "all",
+        ["match", ["get", "class"], ["runway"], true, false],
+        [
+          "match",
+          ["geometry-type"],
+          ["LineString", "MultiLineString"],
+          true,
+          false,
+        ],
+      ],
+      layout: {
+        "line-cap": "square",
+        "line-join": "miter",
+        visibility: "visible",
+        "line-miter-limit": 0,
+      },
+      paint: {
+        "line-color": "rgba(63, 63, 63, 1)",
+        "line-opacity": 1,
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.5],
+          ["zoom"],
+          11,
+          4,
+          17,
+          50,
+        ],
+      },
+    },
+  ],
+  id: "3vnr5hczv",
+};
