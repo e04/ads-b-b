@@ -8,6 +8,7 @@ No needs backends and drivers to decode ADS-B signal, just only a browser.
 
 # Usage
 
-1. Connect your RTL-SDR dongle 
+1. Connect your RTL-SDR dongle (I use RTL-SDR Blog V3 dongle)
 2. Open https://e04.github.io/ads-b-b/dist/index.html
+3. Click anywhere in the window to open the Connect USB Device dialog
 4. You can see airplane positions on a map!
